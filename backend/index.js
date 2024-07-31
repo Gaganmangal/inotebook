@@ -2,7 +2,7 @@ const connectToMongo = require("./db");
 connectToMongo();
 const express = require("express"); //Import Express Module
 const app = express(); //Create an Express Application
-const port = 3000; //Define a Port Number
+const port = 5000; //Define a Port Number
 
 app.use(express.json());
 
