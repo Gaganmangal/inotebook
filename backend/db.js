@@ -1,5 +1,5 @@
 const mongoose = require("mongoose"); //Mongoose library ko import kiya jata hai, jo MongoDB ke saath object modeling aur schema-based interactions ke liye use hoti hai.
-const mongoURI = "mongodb://localhost:27017"; //mongoURI variable mein MongoDB server ka URI define kiya jata hai. Yahan localhost par port 27017 (default MongoDB port) ka use kiya gaya hai.
+const mongoURI = "mongodb://localhost:27017/inotebook"; //mongoURI variable mein MongoDB server ka URI define kiya jata hai. Yahan localhost par port 27017 (default MongoDB port) ka use kiya gaya hai.
 
 const connectToMongo = () => {
   mongoose
