@@ -6,11 +6,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "GaganMangalB$OY";
+
 // Create a User using: POST "/api/auth/createuser". No login required
 router.post(
   "/createuser",
   [
-    // Validate and sanitize fields.
     body("name")
       .isLength({ min: 5 })
       .withMessage("Username must be at least 5 characters long"),
@@ -20,19 +20,17 @@ router.post(
       .withMessage("Password must be at least 5 characters long"),
   ],
   async (req, res) => {
-    // Find validation errors in this request and wrap them in an object.
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // If no errors, proceed with handling the request.
 
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
         return res
           .status(400)
-          .json({ error: "Sorry a user with this email already exists" });
+          .json({ error: "Sorry, a user with this email already exists" });
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -55,7 +53,57 @@ router.post(
       res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error occured");
+      res.status(500).send("Some Error occurred");
+    }
+  }
+);
+
+// Authenticate a User using: POST "/api/auth/login". No login required
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Invalid email address"),
+    body("password")
+      .exists()
+      .withMessage("Password is required"),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials" });
+      }
+
+      const passwordCompare = await bcrypt.compare(password, user.password);
+
+      if (!passwordCompare) {
+        return res
+          .status(400)
+          .json({ error: "Please try to login with correct credentials" });
+      }
+
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      const authtoken = jwt.sign(data, JWT_SECRET);
+
+      res.json({ authtoken });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Some Error occurred");
     }
   }
 );
