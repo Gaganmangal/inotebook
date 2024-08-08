@@ -11,7 +11,7 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
     res.json(notes);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Some Error occurred");
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -44,7 +44,7 @@ router.post(
       res.json(SaveNote);
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error occurred");
+      res.status(500).send("Internal Server Error");
     }
   }
 );
@@ -78,8 +78,26 @@ router.put("/Update/:id", fetchuser, async (req, res) => {
     res.json({ note });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Some Error occurred");
+    res.status(500).send("Internal Server Error");
   }
 });
-
+//ROUTE 3:Delete Notes using: PUT "/api/notes/deletenote/:id".Login required
+router.delete("/deletenote/:id", fetchuser, async (req, res) => {
+  try {
+    // Find the note to be delete and delete it
+    let note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("Not Found");
+    }
+    // Allow deletion only if user owns this Note
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
+    note = await Notes.findByIdAndDelete(req.params.id);
+    res.json({ Success: "Note has been deleted", note: note });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 module.exports = router;
