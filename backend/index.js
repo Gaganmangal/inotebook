@@ -10,5 +10,5 @@ app.use("/api/auth", require("./routes/auth")); //Define a Route
 app.use("/api/notes", require("./routes/notes")); //Define a Route
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`INotebook app listening at http://localhost:${port}`);
 }); //Start the Server
