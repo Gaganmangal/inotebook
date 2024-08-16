@@ -1,6 +1,7 @@
 import React from "react";
 const Noteitem = (props) => {
   const { note } = props;
+  // create a Note Card
   return (
     <div className="col-md-3">
       <div className="card my-3">
