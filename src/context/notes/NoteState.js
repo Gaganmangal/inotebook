@@ -49,6 +49,7 @@ const NoteState = (props) => {
     },
   ];
   const [notes, setNotes] = useState(notesInitial);
+
   // Add a Note
   const addNote = (title, description, tag) => {
     const note = {
@@ -62,10 +63,29 @@ const NoteState = (props) => {
     };
     setNotes(notes.concat(note));
   };
+
   // // Delete a Note
-  const deleteNote = () => {};
+  const deleteNote = (id) => {
+    console.log(id);
+    const newNote = notes.filter((note) => {
+      return note._id !== id;
+    });
+    setNotes(newNote);
+  };
+
   // // Edit a Note
-  const editNote = () => {};
+  const editNote = async (id, title, description, tag) => {
+    // API CALL
+
+    for (let index = 0; index < notes.length; index++) {
+      const element = notes[index];
+      if (element._id === id) {
+        element.title = title;
+        element.description = description;
+        element.tag = tag;
+      }
+    }
+  };
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
