@@ -32,19 +32,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    if (!response.ok) {
-      console.error("Failed to add note:", response.statusText);
-      return;
-    }
-    const note = {
-      _id: "66b8b6cd4aes37b77fab02847",
-      user: "66ae03459dcd9deb7cc09a3a",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2024-08-11T13:04:13.477Z",
-      __v: 0,
-    };
+
+    const note = await response.json();
     setNotes(notes.concat(note));
   };
 
@@ -61,7 +50,6 @@ const NoteState = (props) => {
     });
     const json = response.json();
     console.log(json);
-    console.log(id);
     const newNote = notes.filter((note) => {
       return note._id !== id;
     });
@@ -78,9 +66,10 @@ const NoteState = (props) => {
         "auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhZTAzNDU5ZGNkOWRlYjdjYzA5YTNhIn0sImlhdCI6MTcyMjc1NjcwNX0.CBgEYrgEdfJpfOp4JpBOTRyNJTLSogusK-nKKIsbdfs",
       },
+      body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
-    console.log(json);
+    console.log("json data", json);
     let newNotes = JSON.parse(JSON.stringify(notes));
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {

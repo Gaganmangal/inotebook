@@ -13,7 +13,12 @@ const Note = () => {
 
   const ref = useRef(null);
   const refClose = useRef(null);
-  const [note, setNote] = useState({id:"", etitle: "", edescription: "", etag: "" });
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "",
+  });
 
   const updateNote = (currentNote) => {
     ref.current.click();
@@ -27,7 +32,7 @@ const Note = () => {
 
   const handleClick = (e) => {
     console.log("Updating the note...", note);
-    editNote(note.id, note.etitle, note.edescription, note.etag)
+    editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
   };
 
@@ -80,6 +85,8 @@ const Note = () => {
                     name="etitle"
                     value={note.etitle}
                     aria-describedby="emailHelp"
+                    minLength={5}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -93,6 +100,8 @@ const Note = () => {
                     id="edescription"
                     name="edescription"
                     value={note.edescription}
+                    minLength={5}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -121,6 +130,9 @@ const Note = () => {
                 Close
               </button>
               <button
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
                 onClick={handleClick}
                 type="button"
                 className="btn btn-primary"
@@ -133,6 +145,9 @@ const Note = () => {
       </div>
       <div className="row my-3">
         <h2>Your Note is here</h2>
+        <div className="container mx-2">
+          {notes.length === 0 && "No notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <Noteitem key={note._id} updateNote={updateNote} note={note} />
