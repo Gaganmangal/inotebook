@@ -7,7 +7,7 @@ import NoteState from "./context/notes/NoteState";
 // import Alert from "./components/Alert";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 function App() {
   return (
     <>
