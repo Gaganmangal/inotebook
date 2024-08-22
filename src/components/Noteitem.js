@@ -20,6 +20,7 @@ const Noteitem = (props) => {
           style={{ color: "#ff6347", cursor: "pointer" }}
           onClick={() => {
             deleteNote(note._id);
+            props.showAlert("Delete Successfully", "success");
           }}
         ></i>
         <i

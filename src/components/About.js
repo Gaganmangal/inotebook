@@ -4,6 +4,7 @@ import '../About.css'; // Ensure the path is correct
 
 const About = () => {
   return (
+    <>
     <div className="container">
       <header className="header">
         <h1 className="header-title">About Us</h1>
@@ -18,7 +19,6 @@ const About = () => {
         <section className="section">
           <h2 className="section-title">Our Team</h2>
           <div className="profile-container">
-            {/* Profile 1 */}
             <div className="profile-card">
               <img 
                 src="https://i.pinimg.com/564x/07/64/93/07649350f0d864cdbedb0f2d701d0340.jpg" 
@@ -28,7 +28,6 @@ const About = () => {
               <h4 className="profile-name">John Doe</h4>
               <p className="profile-role">Lead Developer</p>
             </div>
-            {/* Profile 2 */}
             <div className="profile-card">
               <img 
                 src="https://i.pinimg.com/564x/07/64/93/07649350f0d864cdbedb0f2d701d0340.jpg" 
@@ -38,7 +37,6 @@ const About = () => {
               <h4 className="profile-name">Jane Smith</h4>
               <p className="profile-role">Project Manager</p>
             </div>
-            {/* Profile 3 */}
             <div className="profile-card">
               <img 
                 src="https://i.pinimg.com/564x/07/64/93/07649350f0d864cdbedb0f2d701d0340.jpg" 
@@ -48,7 +46,6 @@ const About = () => {
               <h4 className="profile-name">Alice Johnson</h4>
               <p className="profile-role">UX/UI Designer</p>
             </div>
-            {/* Profile 4 */}
             <div className="profile-card">
               <img 
                 src="https://i.pinimg.com/564x/07/64/93/07649350f0d864cdbedb0f2d701d0340.jpg" 
@@ -106,7 +103,7 @@ const About = () => {
         </section>
       </div>
     </div>
-  );
+    </>  );
 };
 
 export default About;

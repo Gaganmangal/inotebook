@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 
-const AddNote = () => {
+const AddNote = (props) => {
   const { addNote } = useContext(NoteContext);
   const [note, setNote] = useState({
     title: "",
@@ -12,13 +12,14 @@ const AddNote = () => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
     setNote({ title: "", description: "", tag: "" });
+    props.showAlert("Add Successfully", "success");
   };
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="container my-3">
+    <div className="container my-1">
       <div
         className="card shadow-lg"
         style={{ borderRadius: "15px", backgroundColor: "#f9f9f9" }}

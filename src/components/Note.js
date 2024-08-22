@@ -3,9 +3,9 @@ import NoteContext from "../context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
 
-const Note = () => {
+const Note = (props) => {
   const { notes, getNote, editNote } = useContext(NoteContext);
-
+  const { showAlert } = props;
   useEffect(() => {
     getNote();
     // eslint-disable-next-line
@@ -34,6 +34,7 @@ const Note = () => {
     console.log("Updating the note...", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Update Successfully", "success");
   };
 
   const onChange = (e) => {
@@ -42,7 +43,7 @@ const Note = () => {
   // Display Note in screen
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={showAlert} />
       <button
         ref={ref}
         type="button"
@@ -150,7 +151,12 @@ const Note = () => {
         </div>
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} />
+            <Noteitem
+              key={note._id}
+              updateNote={updateNote}
+              note={note}
+              showAlert={showAlert}
+            />
           );
         })}
       </div>

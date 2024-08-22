@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -24,13 +24,16 @@ const Signup = () => {
     setError(""); // Clear error if passwords match
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/createuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/auth/createuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        }
+      );
 
       const json = await response.json();
       console.log(json);
@@ -38,8 +41,9 @@ const Signup = () => {
       if (json.success) {
         localStorage.setItem("token", json.authtoken);
         navigate("/");
+        props.showAlert("Account Created Successfully", "success");
       } else {
-        alert("Invalid credentials");
+        props.showAlert("Invalid credentials", "danger");
       }
     } catch (error) {
       console.error("Error:", error);
