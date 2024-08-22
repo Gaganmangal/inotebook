@@ -1,0 +1,80 @@
+/* src/About.css */
+
+.container {
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-title {
+    font-size: 2.5rem;
+    color: #007bff;
+  }
+  
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    color: #0056b3;
+  }
+  
+  .section-text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .profile-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile-name {
+    color: #4682b4;
+    margin: 10px 0;
+  }
+  
+  .profile-role {
+    margin: 0;
+  }
+  

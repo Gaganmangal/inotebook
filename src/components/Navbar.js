@@ -1,16 +1,27 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import "../Navbar.css"; // Import your CSS file
+
 const Navbar = () => {
   let location = useLocation();
+
   useEffect(() => {
     console.log(location.pathname);
     // eslint-disable-next-line
   }, [location]);
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav
+        className="navbar navbar-expand-lg navbar-custom"
+        style={{ fontSize: "1.2rem" }} // Increase font size here
+      >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link
+            className="navbar-brand"
+            to="/"
+            style={{ color: "#82378d", fontSize: "1.5rem" }}
+          >
             iNotebook
           </Link>
           <button
@@ -33,6 +44,7 @@ const Navbar = () => {
                   }`}
                   aria-current="page"
                   to="/"
+                  style={{ fontSize: "1.2rem" }}
                 >
                   Home
                 </Link>
@@ -43,16 +55,27 @@ const Navbar = () => {
                     location.pathname === "/about" ? "active" : ""
                   }`}
                   to="/about"
+                  style={{ fontSize: "1.2rem" }}
                 >
                   About
                 </Link>
               </li>
             </ul>
             <form className="d-flex" role="search">
-              <Link className="btn btn-primary mx-1" to="/login" role="button">
+              <Link
+                className="btn btn-primary mx-1"
+                to="/login"
+                role="button"
+                style={{ fontSize: "1.2rem" }}
+              >
                 Login
               </Link>
-              <Link className="btn btn-primary mx-1" to="/signup" role="button">
+              <Link
+                className="btn btn-primary mx-1"
+                to="/signup"
+                role="button"
+                style={{ fontSize: "1.2rem" }}
+              >
                 Signup
               </Link>
             </form>
