@@ -22,9 +22,10 @@ const Login = (props) => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
+      console.log(json.authtoken);
       localStorage.setItem("token", json.authtoken);
-      navigate("/");
       props.showAlert("Logged in Successfully", "success");
+      navigate("/");
     } else {
       props.showAlert("Invalid Details", "danger");
     }

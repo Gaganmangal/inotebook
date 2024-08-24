@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../Navbar.css"; // Import your CSS file
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const Navbar = () => {
+const Navbar = (props) => {
   let location = useLocation();
-
+  let navigate = useNavigate(); // Use useNavigate instead of useHistory
   useEffect(() => {
     console.log(location.pathname);
     // eslint-disable-next-line
   }, [location]);
 
+  const handLogout = () => {
+    localStorage.removeItem("token");
+    props.showAlert("Logout Successfully", "success");
+    navigate("/login");
+  };
   return (
     <div>
       <nav
@@ -61,24 +67,34 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex" role="search">
-              <Link
-                className="btn btn-primary mx-1"
-                to="/login"
-                role="button"
+            {!localStorage.getItem("token") ? (
+              <form className="d-flex" role="search">
+                <Link
+                  className="btn btn-primary mx-1"
+                  to="/login"
+                  role="button"
+                  style={{ fontSize: "1.2rem" }}
+                >
+                  Login
+                </Link>
+                <Link
+                  className="btn btn-primary mx-1"
+                  to="/signup"
+                  role="button"
+                  style={{ fontSize: "1.2rem" }}
+                >
+                  Signup
+                </Link>
+              </form>
+            ) : (
+              <button
+                onClick={handLogout}
+                className="btn btn-primary"
                 style={{ fontSize: "1.2rem" }}
               >
-                Login
-              </Link>
-              <Link
-                className="btn btn-primary mx-1"
-                to="/signup"
-                role="button"
-                style={{ fontSize: "1.2rem" }}
-              >
-                Signup
-              </Link>
-            </form>
+                Logout
+              </button>
+            )}
           </div>
         </div>
       </nav>
